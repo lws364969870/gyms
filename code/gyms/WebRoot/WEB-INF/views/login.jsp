@@ -18,9 +18,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	<style type="text/css">
+		.login {
+			position: absolute; 
+			height: 100%;
+			width: 100%;
+			left: 0;
+			top: 0;
+			background-image: url("${pageContext.request.contextPath}/img/system/welcome.jpg");
+			background-color: #ccc;
+			background-size: 100% 100%;
+		}
+	</style>
   </head>
   
-  <body>
-    This is my JSP page. <br>
-  </body>
+  
+<body>
+	<div class="login">
+    <form action="${pageContext.request.contextPath}/LoginController/login" method="post">        
+                    <input type="text" name="username" >
+                    <input type="password" name="password" >
+                    <button type="submit" id="login-button">Login</button>
+    </form> 
+    ${msg} 
+	</div>
+</body>
 </html>

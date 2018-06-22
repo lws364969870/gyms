@@ -20,7 +20,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
   </head>
   
-  <body>
-    This is my login page. <br>
-  </body>
+  
+<body>
+    当前用户：${USER_SESSION.username}
+    <a href="${pageContext.request.contextPath}/LoginController/logout">退出</a>
+</body>
 </html>
