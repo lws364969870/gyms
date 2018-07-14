@@ -1,4 +1,6 @@
-/code/.settings
-/code/target
-/code/.project
-/code/.classpath
+/code/.metadata/*
+/code/gyms/.settings
+/code/gyms/target
+/code/gyms/.project
+/code/gyms/.classpath
+*.class

@@ -156,7 +156,8 @@
                         <!--指定web.xml的路径  -->  
                     <webXml>WebRoot\WEB-INF\web.xml</webXml>  
                     <!--指定jsp、js、css的路劲  -->  
-                    <warSourceDirectory>WebRoot</warSourceDirectory>  
+                    <warSourceDirectory>WebRoot</warSourceDirectory>
+                    <version>3.0</version>
                 </configuration>  
             </plugin> 
 		</plugins>
