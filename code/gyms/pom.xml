@@ -98,6 +98,13 @@
 			<version>1.2</version>
 		</dependency>
 
+		<!-- Json工具 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+
 		<!-- 帮助工具 -->
 		<dependency>
 			<groupId>tk.mybatis</groupId>
@@ -148,18 +155,18 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
-			<plugin>  
-                <groupId>org.apache.maven.plugins</groupId>  
-                <artifactId>maven-war-plugin</artifactId>  
-                <version>2.1.1</version>  
-                <configuration>  
-                        <!--指定web.xml的路径  -->  
-                    <webXml>WebRoot\WEB-INF\web.xml</webXml>  
-                    <!--指定jsp、js、css的路劲  -->  
-                    <warSourceDirectory>WebRoot</warSourceDirectory>
-                    <version>3.0</version>
-                </configuration>  
-            </plugin> 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<!--指定web.xml的路径 -->
+					<webXml>WebRoot\WEB-INF\web.xml</webXml>
+					<!--指定jsp、js、css的路劲 -->
+					<warSourceDirectory>WebRoot</warSourceDirectory>
+					<version>3.0</version>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>
