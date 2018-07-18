@@ -1,45 +1,38 @@
 package com.dream.gyms.demo.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dream.gyms.demo.entity.DemoObject;
+import com.dream.gyms.demo.entity.Demo;
+import com.dream.gyms.demo.service.DemoService;
 
-@RestController //@RestController is a stereotype annotation that combines @ResponseBody and @Controller.
+//@RestController is a stereotype annotation that combines @ResponseBody and @Controller.
+//http://localhost:8080/gyms/DemoController/demo1
+@RestController 
 @RequestMapping(value="/DemoController")
 public class DemoController {
 
+	@Resource
+	private DemoService demoService;
 	
+	//返回string
 	@RequestMapping(value="/demo1")
-	public Map<String, Object> demo1(String param){
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("result", 1);
-		map.put("flag", 1);
-		return map;
-	}
-	
-	@RequestMapping(value="/demo2")
-	public DemoObject demo2(String param){
-		DemoObject obj = new DemoObject();
-		obj.setId("1");
-		obj.setName("aaa");
-		return obj;
-	}
-	
-	/**
-	 * http://localhost:8080/gyms/DemoController/demo1
-	 */
-	@RequestMapping(value="/demo3")
-	public String demo3(String param){
-		
+	public String demo1(String param){
+		demoService.testInsert();
+		demoService.testSelect();
 		return "haha";
 	}
+
 	
-	@RequestMapping(value="/demo4")
-	public String demo4(String param,String param2){
-		return param+param2;
+	//返回string
+	@RequestMapping(value="/demo2")
+	public String demo2(String param){
+		Demo a = new Demo();
+		a.setFid(2l);
+		a.setName("aa");
+		demoService.save(a);
+		return "haha";
 	}
 }
