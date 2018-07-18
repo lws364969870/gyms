@@ -10,7 +10,7 @@ public class LoginController {
 	@RequestMapping(value="/login")
 	public String login(String param){
 		
-		return "index";
+		return "login";
 	}
 	
 	@RequestMapping(value="/demo")
