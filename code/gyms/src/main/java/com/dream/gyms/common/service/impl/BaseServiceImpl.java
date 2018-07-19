@@ -54,12 +54,12 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 	}
 
 	// 插入
-	public Integer save(T param) {
+	public Integer insert(T param) {
 		return this.mapper.insert(param);
 	}
 
 	// 新增非空字段
-	public Integer saveSelect(T param) {
+	public Integer insertSelect(T param) {
 		return this.mapper.insertSelective(param);
 	}
 

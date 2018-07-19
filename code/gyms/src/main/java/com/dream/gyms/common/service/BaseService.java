@@ -25,10 +25,10 @@ public interface BaseService<T> {
 	public T queryOne(T param);
 
 	// 插入
-	public Integer save(T param);
+	public Integer insert(T param);
 
 	// 新增非空字段
-	public Integer saveSelect(T param);
+	public Integer insertSelect(T param);
 
 	// 根据主键更新
 	public Integer update(T param);
