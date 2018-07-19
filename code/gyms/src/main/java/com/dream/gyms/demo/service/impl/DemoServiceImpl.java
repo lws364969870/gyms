@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,11 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo> implements DemoServic
 
 	@Resource
 	private DemoMapper demoMapper;
+
+	@Autowired
+	public void setDemoMapper() {
+		super.setMapper(demoMapper);
+	}
 
 	@Override
 	public void testSelect() {
