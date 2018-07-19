@@ -32,7 +32,7 @@ public class DemoController {
 		Demo a = new Demo();
 		a.setFid(2l);
 		a.setName("aa");
-		demoService.save(a);
+		demoService.insert(a);
 		return "haha";
 	}
 }

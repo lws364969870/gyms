@@ -48,7 +48,7 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo> implements DemoServic
 		Demo a = new Demo();
 		a.setFid(2l);
 		a.setName("aa");
-		super.save(a);
+		super.insert(a);
 		System.out.println(a.getFid());
 	}
 }
