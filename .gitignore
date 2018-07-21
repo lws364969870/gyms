@@ -1,6 +1,6 @@
 /code/.metadata/*
 /code/gyms/.settings
 /code/gyms/target
-/code/gyms/.project
-/code/gyms/.classpath
+#/code/gyms/.project
+#/code/gyms/.classpath
 *.class
