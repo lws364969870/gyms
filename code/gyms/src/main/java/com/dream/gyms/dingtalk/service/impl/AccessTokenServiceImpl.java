@@ -35,7 +35,7 @@ public class AccessTokenServiceImpl extends BaseServiceImpl<AccessToken> impleme
 	}
 
 	/**
-	 * 保存token
+	 * 保存access_token
 	 * 
 	 * @author lws
 	 * @param accesstoken
@@ -53,7 +53,7 @@ public class AccessTokenServiceImpl extends BaseServiceImpl<AccessToken> impleme
 	}
 
 	/**
-	 * insert返回ID
+	 * insert access_token 返回ID
 	 * 
 	 * @author lws
 	 */
@@ -64,7 +64,7 @@ public class AccessTokenServiceImpl extends BaseServiceImpl<AccessToken> impleme
 	}
 
 	/**
-	 * 清空所有DB token
+	 * 清空所有DB access_token
 	 * 
 	 * @author lws
 	 */
@@ -75,6 +75,9 @@ public class AccessTokenServiceImpl extends BaseServiceImpl<AccessToken> impleme
 	}
 
 	// {"expires_in":7200,"errmsg":"ok","access_token":"aeacac361301366da73d0d2b15d5c276","errcode":0}
+	/**
+	 * 获取access_token
+	 */
 	@Override
 	public String getAccessToken() throws Exception {
 		// 先查询数据库是否有值，有值校验日期，没值请求钉钉获取token
@@ -86,8 +89,8 @@ public class AccessTokenServiceImpl extends BaseServiceImpl<AccessToken> impleme
 				token = accessToken.getAccessToken();
 			} else {
 				// 超时
-				//deleteAllAccessToken();
-				token = AuthHelper.getHttpToken();
+				// deleteAllAccessToken();
+				token = AuthHelper.getSsoToken();
 				accessToken = new AccessToken();
 				accessToken.setId(DEFAULT_DB_TOKEN_ID);
 				accessToken.setAccessToken(token);
@@ -96,7 +99,7 @@ public class AccessTokenServiceImpl extends BaseServiceImpl<AccessToken> impleme
 			}
 		} else {
 			// 数据库查询为空
-			token = AuthHelper.getHttpToken();
+			token = AuthHelper.getSsoToken();
 			accessToken = new AccessToken();
 			accessToken.setId(DEFAULT_DB_TOKEN_ID);
 			accessToken.setAccessToken(token);
