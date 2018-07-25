@@ -6,13 +6,13 @@ import java.util.Date;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dream.gyms.common.service.impl.BaseServiceImpl;
 import com.dream.gyms.dingtalk.entity.AccessToken;
 import com.dream.gyms.dingtalk.mapper.AccessTokenMapper;
+import com.dream.gyms.dingtalk.mapper.SsoTokenMapper;
 import com.dream.gyms.dingtalk.service.AccessTokenService;
 import com.dream.gyms.dingtalk.utils.AuthHelper;
 
@@ -29,10 +29,11 @@ public class AccessTokenServiceImpl extends BaseServiceImpl<AccessToken> impleme
 	@Resource
 	private AccessTokenMapper accessTokenMapper;
 
-	@Autowired
-	public void setAccessTokenMapper() {
-		super.setMapper(this.accessTokenMapper);
-	}
+	@Resource
+	private SsoTokenMapper ssoTokenMapper;
+
+	// @Resource
+	// private DemoMapper demoMapper;
 
 	/**
 	 * 保存access_token
@@ -43,6 +44,7 @@ public class AccessTokenServiceImpl extends BaseServiceImpl<AccessToken> impleme
 	 */
 	// @Override
 	public int saveAccessToken(AccessToken accesstoken) {
+
 		int result = 0;
 		if (null != accesstoken.getId()) {
 			result = accessTokenMapper.updateByPrimaryKey(accesstoken);
@@ -57,7 +59,7 @@ public class AccessTokenServiceImpl extends BaseServiceImpl<AccessToken> impleme
 	 * 
 	 * @author lws
 	 */
-	// @Override
+	@Override
 	public int insertAccessToken(AccessToken accesstoken) {
 		int result = accessTokenMapper.insertAccessToken(accesstoken);
 		return result;
@@ -78,7 +80,7 @@ public class AccessTokenServiceImpl extends BaseServiceImpl<AccessToken> impleme
 	/**
 	 * 获取access_token
 	 */
-	@Override
+	// @Override
 	public String getAccessToken() throws Exception {
 		// 先查询数据库是否有值，有值校验日期，没值请求钉钉获取token
 		AccessToken accessToken = this.queryById(DEFAULT_DB_TOKEN_ID);
@@ -90,7 +92,7 @@ public class AccessTokenServiceImpl extends BaseServiceImpl<AccessToken> impleme
 			} else {
 				// 超时
 				// deleteAllAccessToken();
-				token = AuthHelper.getSsoToken();
+				token = AuthHelper.getAccessToken();
 				accessToken = new AccessToken();
 				accessToken.setId(DEFAULT_DB_TOKEN_ID);
 				accessToken.setAccessToken(token);
@@ -99,7 +101,7 @@ public class AccessTokenServiceImpl extends BaseServiceImpl<AccessToken> impleme
 			}
 		} else {
 			// 数据库查询为空
-			token = AuthHelper.getSsoToken();
+			token = AuthHelper.getAccessToken();
 			accessToken = new AccessToken();
 			accessToken.setId(DEFAULT_DB_TOKEN_ID);
 			accessToken.setAccessToken(token);

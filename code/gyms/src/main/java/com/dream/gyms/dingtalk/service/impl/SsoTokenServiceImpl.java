@@ -6,7 +6,8 @@ import java.util.Date;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dream.gyms.common.service.impl.BaseServiceImpl;
 import com.dream.gyms.dingtalk.entity.SsoToken;
@@ -14,6 +15,8 @@ import com.dream.gyms.dingtalk.mapper.SsoTokenMapper;
 import com.dream.gyms.dingtalk.service.SsoTokenService;
 import com.dream.gyms.dingtalk.utils.AuthHelper;
 
+@Service("SsoTokenService")
+@Transactional
 public class SsoTokenServiceImpl extends BaseServiceImpl<SsoToken> implements SsoTokenService {
 
 	// 固定数据库中TOKEN的ID
@@ -24,11 +27,6 @@ public class SsoTokenServiceImpl extends BaseServiceImpl<SsoToken> implements Ss
 
 	@Resource
 	private SsoTokenMapper ssoTokenMapper;
-
-	@Autowired
-	public void setSsoTokenMapper() {
-		super.setMapper(this.ssoTokenMapper);
-	}
 
 	/**
 	 * 保存

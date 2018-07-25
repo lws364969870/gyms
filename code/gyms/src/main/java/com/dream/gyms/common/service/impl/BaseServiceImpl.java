@@ -16,10 +16,6 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 	@Autowired
 	private Mapper<T> mapper;
 
-	public void setMapper(Mapper<T> mapper) {
-		this.mapper = mapper;
-	}
-
 	// 根据id查询实体
 	public T queryById(Long id) {
 		return this.mapper.selectByPrimaryKey(id);

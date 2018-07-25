@@ -4,7 +4,6 @@ import java.net.URLDecoder;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.alibaba.dingtalk.openapi.demo.auth.AuthHelper;
 import com.alibaba.fastjson.JSONObject;
 import com.dream.gyms.dingtalk.api.Env;
 import com.dream.gyms.dingtalk.exception.OApiException;
@@ -94,7 +93,7 @@ public class AuthHelper {
 
 	public static String sign(String ticket, String nonceStr, long timeStamp, String url) throws OApiException {
 		try {
-			return DingTalkJsApiSingnature.getJsApiSingnature(url, nonceStr, timeStamp, ticket);
+			// return DingTalkJsApiSingnature.getJsApiSingnature(url, nonceStr, timeStamp, ticket);
 		} catch (Exception ex) {
 			throw new OApiException(0, ex.getMessage());
 		}
@@ -145,7 +144,7 @@ public class AuthHelper {
 		System.out.println(configValue);
 		return configValue;
 
-		return null;
+		// return null;
 	}
 
 	/**
@@ -156,7 +155,7 @@ public class AuthHelper {
 	 */
 	public static String getAccessToken() throws OApiException {
 
-		String url = "https://oapi.dingtalk.com/sso/gettoken?corpid=" + Env.CORP_ID + "&corpsecret=" + Env.CORP_SECRET;
+		String url = "https://oapi.dingtalk.com/gettoken?corpid=" + Env.CORP_ID + "&corpsecret=" + Env.CORP_SECRET;
 		JSONObject response = HttpHelper.httpGet(url);
 		String ssoToken;
 		if (response.containsKey("access_token")) {
