@@ -7,18 +7,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Access_Token是企业访问钉钉开放平台全局接口的唯一凭证
+ * sso_token对象
  * 
  * @author lws
  * 
  */
-@Table(name = "access_token")
-public class AccessToken {
+@Table(name = "sso_token")
+public class SsoToken {
 	@Id
 	public Long id;
 
-	@Column(name = "access_token")
-	public String accessToken;
+	@Column(name = "sso_token")
+	public String ssoToken;
 
 	@Column(name = "end_time")
 	public Timestamp endTime;
@@ -31,12 +31,12 @@ public class AccessToken {
 		this.id = id;
 	}
 
-	public String getAccessToken() {
-		return accessToken;
+	public String getSsoToken() {
+		return ssoToken;
 	}
 
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
+	public void setSsoToken(String ssoToken) {
+		this.ssoToken = ssoToken;
 	}
 
 	public Timestamp getEndTime() {

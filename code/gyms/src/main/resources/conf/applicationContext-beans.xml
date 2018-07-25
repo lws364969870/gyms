@@ -17,91 +17,73 @@
 
 	<!-- 开启mvc注解驱动 -->
 	<mvc:annotation-driven />
-	
-	
+
+	<mvc:resources location="login" mapping="/login"></mvc:resources>
+
+	<!-- <mvc:interceptors>
+		登录拦截器
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.dream.gyms.system.controller.LoginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+
+	<bean id="loginInterceptor" class="com.dream.gyms.common.interceptor.LoginInterceptor" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="loginInterceptor" />
+			</list>
+		</property>
+	</bean>
+
 	<!-- 日志拦截器 <bean id="logNDCInteceptor" class="com.xxx.core.web.LogNDCInteceptor"/> 
 		权限拦截器 <bean id="myPermissionsInteceptor" class="com.xxx.userplatform.mvc.MyPermissionsInteceptor"/> 
 		RequestHelper拦截器 <bean id="myRequestHelperInteceptor" class="com.xxx.core.web.MyRequestHelperInteceptor"/> 
 		用户信息拦截器 <bean id="myUserInfoInteceptor" class="com.xxx.userplatform.mvc.MyUserInfoInteceptor"/> -->
 
 	<!-- 注解请求映射 -->
-	<!-- <bean
-		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-		<property name="interceptors"> <list> <ref bean="logNDCInteceptor" 
-			/> 日志拦截器 <ref bean="myRequestHelperInteceptor" /> RequestHelper拦截器 <ref bean="myPermissionsInteceptor" 
-			/> 权限拦截器 <ref bean="myUserInfoInteceptor" /> 用户信息拦截器 </list> </property>
-	</bean>
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<ref bean="byteArray_hmc" />
-				<ref bean="string_hmc" />
-				<ref bean="resource_hmc" />
-				<ref bean="source_hmc" />
-				<ref bean="xmlAwareForm_hmc" />
-				<ref bean="jaxb2RootElement_hmc" />
-				<ref bean="jackson_hmc" />
-			</list>
-		</property>
-	</bean>
-	<bean id="byteArray_hmc"
-		class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
-	处理..
-	<bean id="string_hmc"
-		class="org.springframework.http.converter.StringHttpMessageConverter" />
-	处理..
-	<bean id="resource_hmc"
-		class="org.springframework.http.converter.ResourceHttpMessageConverter" />
-	处理..
-	<bean id="source_hmc"
-		class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
-	处理..
-	<bean id="xmlAwareForm_hmc"
-		class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" />
-	处理..
-	<bean id="jaxb2RootElement_hmc"
-		class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" />
-	处理..
-	<bean id="jackson_hmc" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" 
+	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"> 
+		<property name="interceptors"> <list> <ref bean="logNDCInteceptor" /> 日志拦截器 
+		<ref bean="myRequestHelperInteceptor" /> RequestHelper拦截器 <ref bean="myPermissionsInteceptor" 
+		/> 权限拦截器 <ref bean="myUserInfoInteceptor" /> 用户信息拦截器 </list> </property> 
+		</bean> <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"> 
+		<property name="messageConverters"> <list> <ref bean="byteArray_hmc" /> <ref 
+		bean="string_hmc" /> <ref bean="resource_hmc" /> <ref bean="source_hmc" /> 
+		<ref bean="xmlAwareForm_hmc" /> <ref bean="jaxb2RootElement_hmc" /> <ref 
+		bean="jackson_hmc" /> </list> </property> </bean> <bean id="byteArray_hmc" 
+		class="org.springframework.http.converter.ByteArrayHttpMessageConverter" 
+		/> 处理.. <bean id="string_hmc" class="org.springframework.http.converter.StringHttpMessageConverter" 
+		/> 处理.. <bean id="resource_hmc" class="org.springframework.http.converter.ResourceHttpMessageConverter" 
+		/> 处理.. <bean id="source_hmc" class="org.springframework.http.converter.xml.SourceHttpMessageConverter" 
+		/> 处理.. <bean id="xmlAwareForm_hmc" class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" 
+		/> 处理.. <bean id="jaxb2RootElement_hmc" class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" 
+		/> 处理.. <bean id="jackson_hmc" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" 
 		/> -->
 
 	<!-- 对静态资源文件的访问 方案一 （二选一） -->
 	<mvc:default-servlet-handler />
 
 	<!-- 对静态资源文件的访问 方案二 （二选一） -->
-	<!-- <mvc:resources mapping="/images/**" location="/images/" cache-period="31556926"/> 
-		<mvc:resources mapping="/js/**" location="/js/" cache-period="31556926"/> 
-		<mvc:resources mapping="/css/**" location="/css/" cache-period="31556926"/> -->
+	<!-- <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/> <mvc:resources 
+		location="/WEB-INF/js/" mapping="/js/**"/> <mvc:resources location="/WEB-INF/img/" 
+		mapping="/img/**"/> -->
 
 	<!-- 设置视图解析工具（自动把控制器返回的string转换成/WEB-INF/views/string.jsp） -->
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-		
+
 	<!-- 错误处理 -->
-	<!-- <bean id="exceptionResolver"
-		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		<property name="exceptionMappings">
-			<props>
-				上传文件大于最大尺寸后转向出错页面
-				<prop
-					key="org.springframework.web.multipart.MaxUploadSizeExceededException">redirect:/views/error/uploadError.jsp</prop>
-			</props>
-		</property>
-		<property name="defaultErrorView">
-			<value>forward:/views/error/error.jsp</value>
-		</property>
-		<property name="defaultStatusCode">
-			<value>200</value>
-		</property>
-		<property name="warnLogCategory">
-			<value>
-				org.springframework.web.servlet.handler.SimpleMappingExceptionResolver
-			</value>
-		</property>
-	</bean> -->
-	
+	<!-- <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"> 
+		<property name="exceptionMappings"> <props> 上传文件大于最大尺寸后转向出错页面 <prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">redirect:/views/error/uploadError.jsp</prop> 
+		</props> </property> <property name="defaultErrorView"> <value>forward:/views/error/error.jsp</value> 
+		</property> <property name="defaultStatusCode"> <value>200</value> </property> 
+		<property name="warnLogCategory"> <value> org.springframework.web.servlet.handler.SimpleMappingExceptionResolver 
+		</value> </property> </bean> -->
+
 </beans>
 
